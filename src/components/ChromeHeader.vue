@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import { CdxButton, CdxIcon } from '@wikimedia/codex'
 import {
   cdxIconAppearance,
@@ -57,7 +58,7 @@ const isMobile = computed(() => effectiveSkin.value === 'mobile')
           <CdxIcon :icon="cdxIconMenu" />
         </span>
 
-        <a class="chrome-header__brand-link" href="/" aria-label="Visit the main page">
+        <RouterLink class="chrome-header__brand-link" to="/" aria-label="Visit the main page">
           <slot name="logo">
             <span class="chrome-header__wordmarks">
               <img
@@ -76,7 +77,7 @@ const isMobile = computed(() => effectiveSkin.value === 'mobile')
               />
             </span>
           </slot>
-        </a>
+        </RouterLink>
       </div>
 
       <div class="chrome-header__inline-search">
@@ -133,7 +134,7 @@ const isMobile = computed(() => effectiveSkin.value === 'mobile')
         <CdxIcon :icon="cdxIconMenu" />
       </CdxButton>
 
-      <a class="chrome-header__mobile-brand" href="/" aria-label="Visit the main page">
+      <RouterLink class="chrome-header__mobile-brand" to="/" aria-label="Visit the main page">
         <slot name="logo">
           <img
             class="chrome-header__mobile-wordmark-img"
@@ -141,7 +142,7 @@ const isMobile = computed(() => effectiveSkin.value === 'mobile')
             alt="Wikipedia"
           />
         </slot>
-      </a>
+      </RouterLink>
 
       <div class="chrome-header__mobile-actions">
         <CdxButton

@@ -6,12 +6,13 @@ import { defineConfig } from 'vite'
 import VueRouter from 'unplugin-vue-router/vite'
 import vue from '@vitejs/plugin-vue'
 
-// Repo name for GitHub Pages base path. Override with PROTOWIKI_BASE env var
-// when deploying somewhere else (e.g. a fork or a custom domain).
-const repoName = process.env.PROTOWIKI_BASE ?? '/protowiki/'
+// Production builds use a relative base so the app works under any GitHub Pages
+// path (e.g. …/github.io/ProtoWiki/) without hard-coding the repo name. Override
+// with PROTOWIKI_BASE (e.g. '/' for a custom domain at the site root).
+const buildBase = process.env.PROTOWIKI_BASE ?? './'
 
 export default defineConfig(({ command }) => ({
-  base: command === 'build' ? repoName : '/',
+  base: command === 'build' ? buildBase : '/',
   plugins: [
     // Plugin order matters: VueRouter must come before vue() so the routes
     // virtual module is generated first.

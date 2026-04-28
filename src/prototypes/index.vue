@@ -59,7 +59,7 @@ const prototypes = computed<PrototypeEntry[]>(() => {
     <div class="prototype-index">
       <div class="prototype-index__list" role="list">
         <div v-for="entry in prototypes" :key="entry.path" class="prototype-index__card" role="listitem">
-          <CdxCard :url="entry.path">
+          <CdxCard :url="router.resolve({ path: entry.path }).href">
             <template #title>{{ entry.title }}</template>
             <template v-if="entry.description" #description>{{ entry.description }}</template>
           </CdxCard>
