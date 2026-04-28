@@ -10,7 +10,7 @@ You can see it at [wikimedia.github.io/ProtoWiki](https://wikimedia.github.io/Pr
 
 Depending on what you're trying to prototype, you might want to consider using one of these templates or systems.
 
-- [ProtoWiki](https://github.com/wikimedia/ProtoWiki) — This repo! An unopinionated prototyping system for MediaWiki.
+- [ProtoWiki](https://github.com/wikimedia/ProtoWiki#using-protowiki-as-a-system) — This repo! An unopinionated prototyping system for MediaWiki.
 - [Wikipedia Article Template](https://github.com/bmartinezcalvo/wikipedia-article-template) - "Interactive UX prototype template for Wikipedia article pages, built with Vue 3 and Wikimedia Codex design system."
 - [Suggestion Mode Template](https://github.com/bmartinezcalvo/suggestion-mode) - "Interactive UX prototype showing the Suggestion Mode feature in the edit mode of a Wikipedia's article."
 - [Wikihack Starter](https://gitlab.wikimedia.org/egardner/wikihack-starter) — "A Vue 3 prototyping environment for experimenting with Wikipedia reader features. Built for hackathons and rapid iteration, this starter kit lets you test new UI ideas in front of real users with minimal setup."
