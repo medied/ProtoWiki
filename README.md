@@ -1,6 +1,6 @@
 # ProtoWiki
 
-This repo is an experimentalcollection of resources for MediaWiki prototyping. It contains many links to many tools you can use. It's also an unopinionated prototyping template itself for minimal prototypes.
+This repo is an experimental collection of resources for MediaWiki prototyping. It contains many links to many tools you can use. It's also an unopinionated prototyping template itself for minimal prototypes.
 
 You can see it at [wikimedia.github.io/ProtoWiki](https://wikimedia.github.io/ProtoWiki).
 
