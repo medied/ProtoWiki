@@ -47,3 +47,7 @@ npm run dev
 ```
 
 Then open [http://localhost:5173](localhost:5173) in your browser.
+
+## Questions? Thoughts?
+
+Chat to me (Lu Wilson) on Slack! or lwilson-ctr on the wikis! I'm away until May 7th but would be happy to chat with you then!
