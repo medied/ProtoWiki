@@ -39,7 +39,7 @@ Lists of APIs you can use within prototypes.
 - [FakeWiki LLMs.txt](https://todepond.github.io/FakeMediaWiki/llms.txt) — Intended for AI agents: A list of methods and composables exported from the `fakewiki` package.
 - [FakeWiki Reference](https://todepond.github.io/FakeMediaWiki/Fullscreen/FakeWikiReference) — Intended for humans: A list of methods and composables exported from the `fakewiki` package. 
 
-### Using ProtoWiki as a system
+## Using ProtoWiki as a system
 
 To run ProtoWiki locally, clone this repo or use it as a template.
 
