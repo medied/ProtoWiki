@@ -4,7 +4,9 @@ This repo is an experimental collection of resources for MediaWiki prototyping. 
 
 You can see it at [wikimedia.github.io/ProtoWiki](https://wikimedia.github.io/ProtoWiki).
 
-## Prototype templates
+## Resources
+
+### Prototype templates
 
 Depending on what you're trying to prototype, you might want to consider using one of these templates or systems.
 
@@ -16,26 +18,28 @@ Depending on what you're trying to prototype, you might want to consider using o
 - [Wikipedia Boilerplate](https://github.com/Sudhanshugtm/boiler_plate) — "Rapid prototyping framework for Wikipedia UX design work."
 - Amin's monorepo. You'll have to ask Amin for access :)
 
-## Agent skills
+### Agent skills
 
 Skills that you can ask an AI agent to copy and use.
 
 - [ProtoWiki Skills](https://github.com/wikimedia/ProtoWiki/blob/main/AGENTS.md) — "Skills for MediaWiki prototyping."
 - [Wiki Skills](https://gitlab.wikimedia.org/santhosh/wiki-skills) — "A collection of skills for AI coding agents focused on Wikimedia projects."
 
-## Packages
+### Packages
 
 - [Codex package](https://www.npmjs.com/package/@wikimedia/codex) — The Wikimedia Codex design system. You'll want to use this!
 - [FakeWiki package](https://www.npmjs.com/package/fakewiki) — Used within FakeMediaWiki, it contains methods for using various MediaWiki APIs and common prototyping patterns. Highly experimental to use this outside of FakeMediaWiki, but you can try it out if you feel adventurous!
 
-## References
+### References
 
 Lists of APIs you can use within prototypes.
 
 - [Wiki Signals](https://todepond.github.io/FakeMediaWiki/Fullscreen/WikiSignals) — "Guidance for using real MediaWiki data in prototypes."
-- [FakeWiki LLMs.txt](https://todepond.github.io/FakeMediaWiki/llms.txt) — "Intended for AI agents: A list of `FakeWiki` instance methods and Vue composables exported from the `fakewiki` package."
+- [FakeWiki Playground](https://todepond.github.io/FakeMediaWiki/Fullscreen/ApiPlayground) — Explore every function from the `fakewiki` package.
+- [FakeWiki LLMs.txt](https://todepond.github.io/FakeMediaWiki/llms.txt) — Intended for AI agents: A list of methods and composables exported from the `fakewiki` package.
+- [FakeWiki Reference](https://todepond.github.io/FakeMediaWiki/Fullscreen/FakeWikiReference) — Intended for humans: A list of methods and composables exported from the `fakewiki` package. 
 
-## Run ProtoWiki locally
+### Using ProtoWiki as a system
 
 To run ProtoWiki locally, clone this repo or use it as a template.
 
@@ -47,6 +51,14 @@ npm run dev
 ```
 
 Then open [http://localhost:5173](localhost:5173) in your browser.
+
+### Creating a prototype
+
+1. Make a new folder in the `prototypes` folder.
+2. Put an `index.vue` file in the folder containing your prototype.
+3. Click your prototype from the home page!
+
+I recommend copying one of the `-template` prototypes as a starting point. For example, copy+paste the `chrome-template`, give it a new name, and change its name and description inside its `index.vue` file.
 
 ## Questions? Thoughts?
 
