@@ -60,6 +60,8 @@ Then open [http://localhost:5173](localhost:5173) in your browser.
 
 I recommend copying one of the `-template` prototypes as a starting point. For example, copy+paste the `chrome-template`, give it a new name, and change its name and description inside its `index.vue` file.
 
+Trouble-shooting: If it doesn't appear at first or you see a blank screeen, try restarting the dev server. If you don't know how to do this, ask a friendly human or AI agent to help you.
+
 ## Questions? Thoughts?
 
 Chat to me (Lu Wilson) on Slack! or lwilson-ctr on the wikis! I'm away until May 7th but would be happy to chat with you then!
