@@ -9,4 +9,4 @@ ProtoWiki does **not** ship a reusable Visual Editor stand-in component. When yo
 
 Bring lessons or extracted pieces into `src/prototypes/<your-name>/` when you integrate with ProtoWiki chrome (`ChromeWrapper`, `Article`, Codex).
 
-For approach choice (lightweight vs suggestion overlays vs vendoring real VE), see [`visual-editor-prototyping`](../../visual-editor-prototyping/SKILL.md).
+ProtoWiki does not ship skills or scripts for vendoring upstream VisualEditor; keep edit fidelity experiments in those repos (or another fork), then port UI patterns into this codebase as needed.

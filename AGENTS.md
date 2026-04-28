@@ -39,13 +39,13 @@ reads as a normal markdown document.
 
 Skills in `.agents/skills/` come in two flavours, distinguished by name:
 
-- **Portable, environment-agnostic skills** — `codex-*`, `wiki-*`,
-  `visual-editor-*`. These describe the upstream design system, the
-  Wikimedia APIs, and editor-prototyping patterns *without* assuming
-  ProtoWiki. They should be safely copyable into another repo, or
-  consumable on their own. ProtoWiki-specific notes in these skills
-  live in a clearly-marked trailing **Inside ProtoWiki** section, or
-  in a `references/protowiki-integration.md` file beside the skill.
+- **Portable, environment-agnostic skills** — `codex-*`, `wiki-*`.
+  These describe the upstream design system and the Wikimedia APIs
+  *without* assuming ProtoWiki. They should be safely copyable into
+  another repo, or consumable on their own. ProtoWiki-specific notes in
+  these skills live in a clearly-marked trailing **Inside ProtoWiki**
+  section, or in a `references/protowiki-integration.md` file beside the
+  skill.
 - **ProtoWiki integration skills** — `protowiki-*`. These are the home
   for repo-specific paths, components, scripts, and wiring. They
   reference the portable skills above and tell you how to apply them
@@ -53,8 +53,8 @@ Skills in `.agents/skills/` come in two flavours, distinguished by name:
 
 If you find ProtoWiki-specific content (`src/…` paths, ProtoWiki
 component names, repo-only scripts) leaking into a `codex-*` /
-`wiki-*` / `visual-editor-*` skill, move it to a `protowiki-*` skill
-or to that skill's trailing **Inside ProtoWiki** section.
+`wiki-*` skill, move it to a `protowiki-*` skill or to that skill's
+trailing **Inside ProtoWiki** section.
 
 ## Skill index
 
@@ -87,14 +87,6 @@ or to that skill's trailing **Inside ProtoWiki** section.
 | [`wiki-signals`](.agents/skills/wiki-signals/SKILL.md) | Catalog of signals (inference, analytics, links, curation, attribution, edit suggestions) |
 | [`wiki-snapshot-data`](.agents/skills/wiki-snapshot-data/SKILL.md) | Snapshotting article HTML and skin CSS — universal pattern |
 | [`protowiki-snapshot-data`](.agents/skills/protowiki-snapshot-data/SKILL.md) | ProtoWiki integration: `public/snapshots/`, `src/styles/wiki-content/`, `Article` consumption |
-
-### Visual Editor
-
-| Skill | What it covers |
-| --- | --- |
-| [`visual-editor-prototyping`](.agents/skills/visual-editor-prototyping/SKILL.md) | Fork Bárbara’s article template + suggestion-mode repos, suggestion overlays, or real VE |
-| [`visual-editor-vendoring`](.agents/skills/visual-editor-vendoring/SKILL.md) | Real upstream VE: `update-ve.sh`, `loadVe.ts`, lifecycle (universal) |
-| [`protowiki-ve-vendoring`](.agents/skills/protowiki-ve-vendoring/SKILL.md) | ProtoWiki integration: `public/visualeditor/`, `src/lib/visualeditor/`, theming conflict |
 
 Edit Check-style suggestion overlays are split between two skills: see
 [`wiki-signals` → `suggestions.md`](.agents/skills/wiki-signals/references/suggestions.md)

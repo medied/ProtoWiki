@@ -30,8 +30,7 @@ In-browser, the browser sets its own UA — you don't need to override it.
 
 Do not POST edits to a real wiki from ProtoWiki routes. Demonstrate the
 publish *flow* with mocked handlers (toast, `console`, emit). For VisualEditor-shaped
-chrome, fork **[Bárbara Martínez Calvo’s repos](../../protowiki-components/references/editors.md)**
-or build locally — see [`visual-editor-prototyping`](../../visual-editor-prototyping/SKILL.md).
+chrome, fork **[Bárbara Martínez Calvo’s article template and suggestion-mode repos](https://github.com/bmartinezcalvo/wikipedia-article-template)** (details in [`editors.md`](../../protowiki-components/references/editors.md)) rather than wiring real edit APIs here.
 Suggestion-overlay payloads alongside your surface are documented in
 [`protowiki-components` → `edit-suggestions.md`](../../protowiki-components/references/edit-suggestions.md).
 

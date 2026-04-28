@@ -118,5 +118,4 @@ ProtoWiki ships these principles as defaults: `ChromeWrapper`,
 `SpecialPageWrapper`, and `PlainWrapper` paint layout shells and chrome;
 `Article` adds the reader header plus **`ArticleLiveContent`** /
 **`ArticleMockContent`** for parser HTML. Edit UX prototypes belong in forked
-upstream demos — see [`references/editors.md`](../protowiki-components/references/editors.md)
-and [`visual-editor-prototyping`](../visual-editor-prototyping/SKILL.md).
+upstream demos — see [`references/editors.md`](../protowiki-components/references/editors.md).

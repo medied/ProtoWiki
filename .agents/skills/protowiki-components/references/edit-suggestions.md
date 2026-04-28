@@ -282,6 +282,4 @@ unknown types — the field is open by design.
 - [`wiki-signals`](../../wiki-signals/SKILL.md)
   (`suggestions.md`) — the data side: how to generate / fake the
   suggestion stream.
-- [`visual-editor-prototyping`](../../visual-editor-prototyping/SKILL.md)
-  — fork Bárbara’s repos vs vendoring real upstream VE.
-- [`editors.md`](editors.md) — article template + suggestion-mode references.
+- [`editors.md`](editors.md) — article template + suggestion-mode references (Bárbara’s repos).

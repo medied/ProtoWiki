@@ -72,8 +72,7 @@ read and that AI agents auto-discover.
 | Use a Codex component, token, or icon | [`codex-usage`](../codex-usage/SKILL.md) |
 | Fetch real data from Wikipedia | [`wiki-apis`](../wiki-apis/SKILL.md) |
 | Snapshot an article + its skin CSS into the repo | [`protowiki-snapshot-data`](../protowiki-snapshot-data/SKILL.md) |
-| Mock or vendor a VisualEditor experience | [`visual-editor-prototyping`](../visual-editor-prototyping/SKILL.md) |
-| Vendor the real upstream VisualEditor in ProtoWiki | [`protowiki-ve-vendoring`](../protowiki-ve-vendoring/SKILL.md) |
+| Prototype VisualEditor-style editing (article template, suggestion mode) | [`protowiki-components` → `editors.md`](../protowiki-components/references/editors.md) |
 | Make light/dark or desktop/mobile previews | [`protowiki-skins`](../protowiki-skins/SKILL.md) + [`protowiki-theme`](../protowiki-theme/SKILL.md) |
 | Deploy to GitHub Pages | [`protowiki-deploy`](../protowiki-deploy/SKILL.md) |
 

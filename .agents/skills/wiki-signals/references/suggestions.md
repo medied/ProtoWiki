@@ -196,16 +196,16 @@ Filter the loaded suggestions through the set on render.
 
 - **The real Edit Check pipeline** (LLM training, signal triage,
   configuration in `MediaWiki:Editcheck-config.json`). Out of scope.
-- **Hooking suggestions into the real upstream VE.** See
-  [`visual-editor-vendoring`](../../visual-editor-vendoring/SKILL.md).
+- **Hooking suggestions into the real upstream VE.** Out of scope here;
+  prototype against **[Bárbara Martínez Calvo’s repos](https://github.com/bmartinezcalvo/wikipedia-article-template)** or FakeMediaWiki instead — see [`protowiki-components` → `editors.md`](../../protowiki-components/references/editors.md).
 - **Rendering the suggestions inside the editor surface.** That's a
   per-environment concern — see "Inside ProtoWiki" below for
   ProtoWiki's version.
 
 ## See also
 
-- [`visual-editor-prototyping`](../../visual-editor-prototyping/SKILL.md)
-  — fork upstream demos vs suggestion overlays vs vendoring real VE.
+- [`protowiki-components` → `editors.md`](../../protowiki-components/references/editors.md)
+  — Bárbara’s article template + suggestion-mode repos when you need production-shaped edit UX outside ProtoWiki.
 - fakewiki's
   [`docs/VE_SUGGESTION_TYPES_REPORT.md`](https://github.com/TodePond/FakeMediaWiki/blob/main/packages/fakewiki/docs/VE_SUGGESTION_TYPES_REPORT.md)
   — exhaustive per-check writeup with file pointers.
