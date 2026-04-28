@@ -1,0 +1,109 @@
+---
+name: protowiki-create-prototype
+description: How to add a new prototype to ProtoWiki via file-based routing — create a folder under src/prototypes/, register nothing, and the gallery picks it up automatically. Use when asked to "build a prototype", "add a new page", "make a demo", or any variant that creates a new prototype experience under src/prototypes/.
+license: MIT
+---
+
+# Create a new prototype
+
+ProtoWiki uses **file-based routing** (`unplugin-vue-router`). Adding a
+prototype is one folder + one file. There is no manifest, no router config,
+no registration.
+
+## The 30-second version
+
+```bash
+mkdir -p src/prototypes/my-feature
+touch src/prototypes/my-feature/index.vue
+npm run dev
+# open http://localhost:5173/my-feature
+```
+
+Then edit `src/prototypes/my-feature/index.vue`:
+
+```vue
+<script setup lang="ts">
+definePage({
+  meta: {
+    title: 'My feature prototype',
+    description: 'One-sentence pitch shown on the home gallery.',
+  },
+})
+
+import Article from '@/components/Article.vue'
+import ChromeWrapper from '@/components/ChromeWrapper.vue'
+</script>
+
+<template>
+  <ChromeWrapper>
+    <Article title="Albert Einstein" />
+  </ChromeWrapper>
+</template>
+```
+
+Reload — the home gallery (`/`) auto-lists the new entry, the route is live,
+no other file needs to change.
+
+## Conventions
+
+- **One folder per prototype.** `src/prototypes/<kebab-case-name>/index.vue`. The
+  folder name is the URL path. Keep names short (`/article`, `/edit-check`,
+  `/related-strip`) and unique.
+- **Always set `definePage({ meta: { title, description } })`.** It powers
+  the gallery card. Without it, the gallery falls back to a humanized path.
+- **Co-locate prototype-specific assets** inside the folder
+  (`my-feature/data.json`, `my-feature/MyExperiment.vue`). Anything reusable
+  belongs in `src/components/` and gets a skill.
+- **Wrap with `ChromeWrapper`** unless the prototype is intentionally a bare
+  fragment. Most Wikipedia prototypes start with chrome → article columns.
+  `ChromeWrapper` already includes **`SearchBar`** in the header and a
+  placeholder **Username** link — only add `#search` / `#nav-prefix` when
+  you need to replace or clear them.
+- **Don't write per-prototype CSS for what Codex tokens already cover** —
+  that's the [`codex-usage`](../codex-usage/SKILL.md) discipline that keeps
+  prototypes looking like production.
+
+## Common shapes
+
+| Goal | Composition |
+| --- | --- |
+| Article-style page with chrome | `<ChromeWrapper><Article title="…"/></ChromeWrapper>` |
+| Special-page-style page | `<ChromeWrapper><SpecialPageWrapper title="…">…</SpecialPageWrapper></ChromeWrapper>` |
+| Bare canvas with chrome | `<ChromeWrapper>…</ChromeWrapper>` |
+| A/B preview, two themes side by side | Two `<ChromeWrapper>`s, one `theme="light"`, one `theme="dark"` |
+| Mobile preview embedded in a desktop page | `<ChromeWrapper skin="mobile" style="max-width: 360px">…</ChromeWrapper>` |
+
+See [`protowiki-components`](../protowiki-components/SKILL.md) for full
+component docs and [`protowiki-components/references/composition-recipes.md`](../protowiki-components/references/composition-recipes.md)
+for more recipes.
+
+## What you don't need to do
+
+- **No router config.** `unplugin-vue-router` reads `src/prototypes/` and
+  generates the route table.
+- **No gallery edit.** `src/prototypes/index.vue` iterates over the typed route
+  table at runtime; new folders appear automatically.
+- **No skin/theme setup.** `<html data-skin>` / `<html data-theme>` are set
+  at boot from URL params + viewport + `prefers-color-scheme`. Codex tokens
+  cascade through.
+- **No build step for prototypes.** `npm run dev` HMRs every change.
+
+## Sharing your prototype
+
+When the design review is local: `npm run dev`, share the URL.
+
+When you want a stable URL on GitHub Pages: push to `main`. The GitHub Action
+in `.github/workflows/deploy.yml` runs `npm run build` and deploys `dist/`.
+The base path is `/protowiki/` by default; the route map is unchanged so
+`/my-feature` becomes `https://<org>.github.io/protowiki/my-feature`. See
+[`protowiki-deploy`](../protowiki-deploy/SKILL.md).
+
+## When to break the conventions
+
+The conventions exist to keep the gallery uniform and the file tree
+predictable. Break them when the prototype is genuinely different — e.g.,
+nested routes (`/edit-check/step-1`, `/edit-check/step-2`) live as
+`src/prototypes/edit-check/step-1.vue` etc., and a folder-level layout file can
+sit at `src/prototypes/edit-check/index.vue` if there's a shared shell. Keep the
+home-gallery friendly: still set `meta.title` / `meta.description` on each
+leaf prototype.

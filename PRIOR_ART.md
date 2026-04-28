@@ -1,0 +1,6 @@
+- Wikihack starter: https://gitlab.wikimedia.org/egardner/wikihack-starter
+- Wikipedia Article Template: https://github.com/bmartinezcalvo/wikipedia-article-template
+- FakeMediaWiki: https://github.com/todepond/fakemediawiki
+- Amin's monorepo: It's a private repo so I can't share the link, but I've cloned it locally in ../amin-monorepo
+- Wiki Skills: https://gitlab.wikimedia.org/santhosh/wiki-skills
+- Wikipedia UX Prototyping System: https://github.com/Sudhanshugtm/boiler_plate/
