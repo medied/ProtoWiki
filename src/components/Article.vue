@@ -147,6 +147,8 @@ const showArticleHeader = computed(() => Boolean(headerTitle.value))
 }
 
 .article[data-skin='mobile'] {
-  padding: var(--spacing-100, 16px) 0;
+  padding-inline: 0;
+  padding-block-end: var(--spacing-100, 16px);
+  padding-block-start: var(--spacing-150, 24px);
 }
 </style>
