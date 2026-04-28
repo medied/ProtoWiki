@@ -68,7 +68,7 @@ Instead ProtoWiki uses:
    reset, …) onto Codex design tokens.
 
 Per-subtree dark previews (`theme="dark"` on a wrapper while `<html>` stays light)
-still get (2) via `data-theme` on `Article` / `ArticleContent`; they do **not**
+still get (2) via `data-theme` on `Article` / `ArticleLiveContent`; they do **not**
 toggle the RL night class on `<html>`, so RL’s `html.skin-theme-clientpref-night …`
 rules stay dormant unless you also use `?theme=dark` globally.
 
@@ -98,7 +98,7 @@ This is what makes "show me this strip in dark mode" possible without a
 page reload, an iframe, or a separate route.
 
 For a **whole prototype route** that should read as dark (e.g.
-`dark-article-example`), put `theme="dark"` on the outermost wrapper
+one where you set `theme="dark"` on `ChromeWrapper`), put `theme="dark"` on the outermost wrapper
 (`ChromeWrapper`, `PlainWrapper`, etc.). That subtree receives the dark
 token set; chrome and article both inherit. `<body>` may still show the
 global theme behind any gaps — use `?theme=dark` on the URL if you need

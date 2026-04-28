@@ -19,11 +19,9 @@ Realism is the goal. The repo bundles:
 
 - The Wikimedia [Codex design system](https://doc.wikimedia.org/codex/) (Vue 3
   components, CSS tokens, icons) so prototypes look right.
+- Data utilities that talk to the live Wikipedia REST and Action APIs.
 - Single-concern layout wrappers that paint each Wikipedia surface (chrome,
   article column, special-page shell, plain canvas) and compose by nesting.
-- Data utilities that talk to the live Wikipedia REST and Action APIs, plus
-  stand-in editors for prototyping editor UI without vendoring the full
-  VisualEditor bundle.
 - A skills system under `.agents/skills/` that documents every part of
   the repo for both humans and AI coding agents.
 
@@ -51,8 +49,8 @@ protowiki/
 │   ├── App.vue             ← thin shell (RouterView)
 │   ├── prototypes/         ← prototypes (each folder = one route)
 │   │   ├── index.vue       ← home / gallery (auto-lists prototypes)
-│   │   └── example/index.vue
-│   ├── components/         ← all shipped components (wrappers, primitives, editors)
+│   │   └── chrome-template/index.vue
+│   ├── components/         ← shipped components (wrappers, primitives, article)
 │   ├── composables/        ← useSkin / useTheme (read-only hooks)
 │   ├── lib/                ← theming logic, helpers
 │   └── styles/             ← global.css, wiki-content/, dark.css
@@ -70,7 +68,7 @@ read and that AI agents auto-discover.
 | If you want to… | Read… |
 | --- | --- |
 | Make a new prototype | [`protowiki-create-prototype`](../protowiki-create-prototype/SKILL.md) |
-| Look up a component (wrappers, search bar, editors…) | [`protowiki-components`](../protowiki-components/SKILL.md) |
+| Look up a component (wrappers, article surfaces, search bar…) | [`protowiki-components`](../protowiki-components/SKILL.md) |
 | Use a Codex component, token, or icon | [`codex-usage`](../codex-usage/SKILL.md) |
 | Fetch real data from Wikipedia | [`wiki-apis`](../wiki-apis/SKILL.md) |
 | Snapshot an article + its skin CSS into the repo | [`protowiki-snapshot-data`](../protowiki-snapshot-data/SKILL.md) |

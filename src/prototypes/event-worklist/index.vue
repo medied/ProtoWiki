@@ -10,17 +10,13 @@ import {
   CdxTabs,
   CdxTextArea,
 } from '@wikimedia/codex'
-import {
-  cdxIconAdd,
-  cdxIconClock,
-  cdxIconTrash,
-} from '@wikimedia/codex-icons'
+import { cdxIconAdd, cdxIconClock, cdxIconTrash } from '@wikimedia/codex-icons'
 
 import ChromeWrapper from '@/components/ChromeWrapper.vue'
 
 definePage({
   meta: {
-    title: 'Event worklist',
+    title: 'Example: Event worklist',
     description: 'Prototype for an event worklist page.',
   },
 })
@@ -106,10 +102,9 @@ function normalizeHrefKey(url: URL): string {
   return `${url.origin}${url.pathname}`.toLowerCase()
 }
 
-function parseWikiArticleUrl(line: string): Pick<
-  WorklistRow,
-  'article' | 'articleUrl' | 'wiki'
-> | null {
+function parseWikiArticleUrl(
+  line: string,
+): Pick<WorklistRow, 'article' | 'articleUrl' | 'wiki'> | null {
   try {
     const raw = line.trim()
     if (!raw) return null
@@ -187,19 +182,14 @@ function removeRow(rowId: string) {
 <template>
   <ChromeWrapper>
     <div class="event-worklist__body">
-      <h1 class="event-worklist__title">Event:</h1>
+      <h1 class="event-worklist__title">Wiki Loves Earth 2026</h1>
       <CdxTabs v-model:active="activeTab" class="event-worklist__tabs">
         <CdxTab name="details" label="Event details" disabled />
         <CdxTab name="participants" label="Participants" disabled />
         <CdxTab name="worklist" label="Worklist">
-          <section
-            class="event-worklist__card"
-            aria-labelledby="event-worklist-heading"
-          >
+          <section class="event-worklist__card" aria-labelledby="event-worklist-heading">
             <div class="event-worklist__card-header">
-              <h2 id="event-worklist-heading" class="event-worklist__card-title">
-                Worklist
-              </h2>
+              <h2 id="event-worklist-heading" class="event-worklist__card-title">Worklist</h2>
               <CdxButton aria-label="Add" @click="openAddDialog">
                 <CdxIcon :icon="cdxIconAdd" />
               </CdxButton>
@@ -236,11 +226,7 @@ function removeRow(rowId: string) {
                   </template>
 
                   <template #item-actions="{ row }">
-                    <CdxButton
-                      weight="quiet"
-                      aria-label="Remove"
-                      @click="removeRow(row.id)"
-                    >
+                    <CdxButton weight="quiet" aria-label="Remove" @click="removeRow(row.id)">
                       <CdxIcon :icon="cdxIconTrash" />
                     </CdxButton>
                   </template>
@@ -276,7 +262,8 @@ function removeRow(rowId: string) {
         <CdxTextArea
           v-model="urlPaste"
           :rows="6"
-          placeholder="e.g. https://en.wikipedia.org/wiki/Climate_change"
+          class="event-worklist__url-textarea"
+          :placeholder="'e.g.\u00A0https://en.wikipedia.org/wiki/Climate_change'"
         />
       </CdxField>
     </CdxDialog>
@@ -289,7 +276,9 @@ function removeRow(rowId: string) {
 }
 
 .event-worklist__title {
-  margin: 0 0 var(--spacing-150);
+  /* margin: 0 0 var(--spacing-100); */
+  margin-top: var(--spacing-50);
+  margin-bottom: var(--spacing-150);
   font-family: var(--font-family-system-sans);
   font-size: var(--font-size-xx-large);
   font-weight: var(--font-weight-bold);
@@ -362,5 +351,16 @@ function removeRow(rowId: string) {
 
 .event-worklist__table-footer-text {
   margin: 0;
+}
+
+/* Keep “e.g.” with the sample URL in the placeholder; long URLs wrap without break-all. */
+.event-worklist__url-textarea :deep(textarea) {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.event-worklist__url-textarea :deep(textarea::placeholder) {
+  overflow-wrap: break-word;
+  word-break: normal;
 }
 </style>

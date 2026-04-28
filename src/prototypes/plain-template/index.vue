@@ -3,7 +3,7 @@ import PlainWrapper from '@/components/PlainWrapper.vue'
 
 definePage({
   meta: {
-    title: 'Example: Plain',
+    title: 'Template: Plain',
     description: 'Template for minimal prototypes.',
   },
 })
@@ -11,6 +11,6 @@ definePage({
 
 <template>
   <PlainWrapper heading="Plain wrapper">
-    <p>This is an example of an empty plain wrapper component.</p>
+    <p>Starter template — empty plain wrapper.</p>
   </PlainWrapper>
 </template>

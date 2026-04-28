@@ -1,6 +1,6 @@
 ---
 name: visual-editor-vendoring
-description: Deep dive on vendoring the real upstream Wikipedia VisualEditor bundle into a frontend — the update-ve.sh snapshot script that fetches the bundle, the loadVe.ts loader that injects it on demand, and the whenVeReady() / whenVePlatformReady() lifecycle for waiting on init. Use when your work genuinely needs real VE fidelity (toolbar, reference dialog, transclusion editor) and a local stand-in editor isn't enough.
+description: Deep dive on vendoring the real upstream Wikipedia VisualEditor bundle into a frontend — the update-ve.sh snapshot script that fetches the bundle, the loadVe.ts loader that injects it on demand, and the whenVeReady() / whenVePlatformReady() lifecycle for waiting on init. Use when your work genuinely needs real VE fidelity (toolbar, reference dialog, transclusion editor) and a forked demo or lightweight editor surface isn't enough.
 license: MIT
 ---
 

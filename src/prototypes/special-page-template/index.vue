@@ -7,7 +7,7 @@ import SpecialPageWrapper from '@/components/SpecialPageWrapper.vue'
 
 definePage({
   meta: {
-    title: 'Example: Special page',
+    title: 'Template: Special page',
     description: 'Template for special page prototypes.',
   },
 })
@@ -23,7 +23,7 @@ definePage({
         </a>
       </template>
 
-      <p>This is an example of an empty special page wrapper.</p>
+      <p>Starter template — empty special page wrapper.</p>
     </SpecialPageWrapper>
   </ChromeWrapper>
 </template>

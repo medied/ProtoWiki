@@ -1,9 +1,11 @@
-# Edit suggestions in `ArticleEditor` / `ArticleEditorPlus`
+# Edit suggestions alongside your editing surface
 
-How to **store and render** an edit-suggestion stream alongside the
-ProtoWiki editor stand-ins — payload shape, side-by-side layout,
+How to **store and render** an edit-suggestion stream next to **whatever
+editor you embed** — payload shape, side-by-side layout,
 sample `SuggestionCard`, at-publish interception, and "apply"
 semantics.
+
+ProtoWiki does not ship a bundled VE stand-in; fork **[Bárbara Martínez Calvo’s article template or suggestion-mode repos](editors.md)** when you want production-shaped edit chrome, or use a minimal `contenteditable` region as below.
 
 This file is about the *consumer* side. For *where the suggestions
 come from* (fixtures, rule-based generation, Lift Wing inference) see
@@ -68,17 +70,16 @@ without an icon — never crash on new types.
 
 ## Side-by-side layout
 
-The editors don't ship a built-in suggestions UI; you build it next to
-them and pass references through. Both editors emit the events you
-need (`update:modelValue`, `publish`, `cancel`) so the suggestion
-panel is fully decoupled.
+Build the suggestion panel beside **your** editor (forked toolbar,
+`contenteditable`, etc.). Wire HTML through `ref`/`v-model` and intercept
+your own publish handler — there is no required ProtoWiki editor component.
 
 ```vue
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import ArticleEditorPlus from '@/components/ArticleEditorPlus.vue'
 import SuggestionCard from './SuggestionCard.vue'
 
+const surfaceRef = ref<HTMLDivElement | null>(null)
 const html = ref('<p>…</p>')
 const suggestions = ref<EditSuggestion[]>([])
 
@@ -86,7 +87,18 @@ onMounted(async () => {
   const res = await fetch(`${import.meta.env.BASE_URL}edit-suggestions/albert-einstein.json`)
   const file: SuggestionFile = await res.json()
   suggestions.value = file.suggestions
+  if (surfaceRef.value && html.value) surfaceRef.value.innerHTML = html.value
 })
+
+function syncFromSurface() {
+  if (!surfaceRef.value) return
+  html.value = surfaceRef.value.innerHTML
+}
+
+function onPublish() {
+  syncFromSurface()
+  /* validate suggestions, mock publish, etc. */
+}
 
 function onAccept(s: EditSuggestion) {
   suggestions.value = suggestions.value.filter((x) => x.id !== s.id)
@@ -99,11 +111,15 @@ function onDismiss(s: EditSuggestion) {
 <template>
   <div class="layout">
     <div class="editor">
-      <ArticleEditorPlus
-        title="Albert Einstein"
-        v-model="html"
-        @publish="onPublish"
-      />
+      <div
+        ref="surfaceRef"
+        class="mw-parser-output"
+        contenteditable="true"
+        role="textbox"
+        aria-multiline="true"
+        @input="syncFromSurface"
+      ></div>
+      <button type="button" @click="onPublish">Publish</button>
     </div>
     <aside class="suggestions" aria-label="Edit suggestions">
       <p v-if="!suggestions.length">All clear.</p>
@@ -217,9 +233,8 @@ function onPublish(payload: { html: string; title?: string }) {
 }
 ```
 
-`ArticleEditorPlus` already shows a word-level diff in its publish
-dialog; you can layer the suggestion check on top of that flow without
-forking the editor.
+Intercept **`onPublish`** (or equivalent) in your prototype — e.g. open a
+`CdxDialog` for review or suggestion warnings — without forking upstream templates.
 
 ## "Apply" semantics
 
@@ -268,7 +283,5 @@ unknown types — the field is open by design.
   (`suggestions.md`) — the data side: how to generate / fake the
   suggestion stream.
 - [`visual-editor-prototyping`](../../visual-editor-prototyping/SKILL.md)
-  — the umbrella that picks between stand-in editors with simulated
-  suggestions and vendoring real upstream VE.
-- [`editors.md`](editors.md) — the underlying editor-component
-  reference.
+  — fork Bárbara’s repos vs vendoring real upstream VE.
+- [`editors.md`](editors.md) — article template + suggestion-mode references.

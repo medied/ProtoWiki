@@ -116,7 +116,7 @@ Before you call a piece of work done, walk through this checklist:
 
 ProtoWiki ships these principles as defaults: `ChromeWrapper`,
 `SpecialPageWrapper`, and `PlainWrapper` paint layout shells and chrome;
-`Article` adds the reader page header + body; **`ArticleContent`** holds the
-parser HTML; the editor stand-ins
-follow the inline-edit + progressive-disclosure pattern. See
-[`protowiki-components`](../protowiki-components/SKILL.md).
+`Article` adds the reader header plus **`ArticleLiveContent`** /
+**`ArticleMockContent`** for parser HTML. Edit UX prototypes belong in forked
+upstream demos — see [`references/editors.md`](../protowiki-components/references/editors.md)
+and [`visual-editor-prototyping`](../visual-editor-prototyping/SKILL.md).

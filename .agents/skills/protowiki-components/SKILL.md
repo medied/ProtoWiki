@@ -1,6 +1,6 @@
 ---
 name: protowiki-components
-description: Catalog of every shipped component in src/components/ — the three single-concern layout wrappers (ChromeWrapper, SpecialPageWrapper, PlainWrapper), the chrome primitives (ChromeHeader, ChromeFooter), Article surface (Article, ArticleHeader, ArticleLiveContent, ArticleMockContent) + SearchBar, and the two VisualEditor stand-ins (ArticleEditor, ArticleEditorPlus). Use when picking a wrapper, composing a page, looking up props/slots/events for any ProtoWiki component, or asking "what components does ProtoWiki ship?".
+description: Catalog of every shipped component in src/components/ — the three single-concern layout wrappers (ChromeWrapper, SpecialPageWrapper, PlainWrapper), the chrome primitives (ChromeHeader, ChromeFooter), Article surface (Article, ArticleHeader, ArticleLiveContent, ArticleMockContent), and SearchBar. Use when picking a wrapper, composing a page, looking up props/slots/events for any ProtoWiki component, or asking "what components does ProtoWiki ship?".
 license: MIT
 ---
 
@@ -20,10 +20,10 @@ This skill is the cross-cutting guide. Per-component depth lives in
 - [`references/article.md`](references/article.md) — `Article`,
   `ArticleHeader`, `ArticleLiveContent`, `ArticleMockContent`
 - [`references/search-bar.md`](references/search-bar.md)
-- [`references/editors.md`](references/editors.md) — `ArticleEditor` and
-  `ArticleEditorPlus`, with comparison
+- [`references/editors.md`](references/editors.md) —
+  Visual editor prototyping **outside** ProtoWiki (fork Bárbara Martínez Calvo’s article template + suggestion-mode repos)
 - [`references/edit-suggestions.md`](references/edit-suggestions.md) —
-  Edit Check-style suggestion stream alongside the editors (payload
+  Edit Check-style suggestion stream alongside **your** editing surface (payload
   shape, side-by-side layout, `SuggestionCard`, publish interception)
 - [`references/composition-recipes.md`](references/composition-recipes.md)
 
@@ -41,8 +41,6 @@ This skill is the cross-cutting guide. Per-component depth lives in
 | `ArticleLiveContent` | Parser column — live REST + cache, or baked `html`; `.mw-parser-output`, optional H1 | No | No |
 | `ArticleMockContent` | Wet Leg fixture: fetches `public/snapshots/wet-leg.html` once (module cache), renders via `ArticleLiveContent` | No | No |
 | `SearchBar` | `CdxTypeaheadSearch` wired to opensearch (default in ChromeHeader) | n/a | n/a |
-| `ArticleEditor` | Lightweight VE stand-in: toolbar + contenteditable + undo | n/a | n/a |
-| `ArticleEditorPlus` | Same + source toggle + autosave + word-diff publish preview | n/a | n/a |
 
 ## The two ideas you need
 
@@ -63,8 +61,9 @@ have to ask "which one?".
 
 ### 2. Shared `skin` / `theme` on every themable component; `lang` / `dir` on layout shells + `Article`
 
-Every component in this list (wrappers, chrome primitives, `Article`,
-`ArticleLiveContent`, `ArticleMockContent`, `SearchBar`, both editors) accepts the same two theming props:
+Every component in this list (`ChromeWrapper`,
+`SpecialPageWrapper`, `PlainWrapper`, `Article`,
+`ArticleLiveContent`, `ArticleMockContent`, `SearchBar`) accepts the same two theming props:
 
 | Prop | Type | Effect |
 | --- | --- | --- |
@@ -109,8 +108,6 @@ import ArticleHeader from '@/components/ArticleHeader.vue'
 import ArticleLiveContent from '@/components/ArticleLiveContent.vue'
 import ArticleMockContent from '@/components/ArticleMockContent.vue'
 import SearchBar from '@/components/SearchBar.vue'
-import ArticleEditor from '@/components/ArticleEditor.vue'
-import ArticleEditorPlus from '@/components/ArticleEditorPlus.vue'
 ```
 
 The `@/` prefix resolves to `src/`.
@@ -129,21 +126,6 @@ The `@/` prefix resolves to `src/`.
 | `ArticleMockContent` | `hideTitle?`, `host?`, `lang?`, `dir?`, `skin?`, `theme?` | default, `#heading` |
 | `ArticleHeader` | `title`, `languagesLabel?`, `languageLinks?`, `languageSearchPlaceholder?`, `tagline?`, `primaryTab?`, `viewTab?` | emits (`languageSelect`, `languageSettingsClick`, tab/action clicks) |
 | `SearchBar` | `host?`, `placeholder?`, `limit?`, `skin?`, `theme?` | none |
-| `ArticleEditor` | `modelValue?`, `title?`, `placeholder?`, `skin?`, `theme?` | `#heading` |
-| `ArticleEditorPlus` | `modelValue?`, `title?`, `placeholder?`, `autosaveMs?`, `storagePrefix?`, `skin?`, `theme?` | `#heading` |
-
-## Editor events
-
-Both editors emit:
-
-- `update:modelValue` — for `v-model="…"` two-way binding of HTML content.
-- `publish` — `{ html, title }` payload when the user confirms publish.
-  `ArticleEditorPlus` only fires this after the user confirms the diff
-  preview in the publish dialog.
-- `cancel` — when the user discards changes.
-
-`ArticleEditorPlus` additionally emits `restore` when the user accepts a
-draft restored from `localStorage`.
 
 ## When to reach beyond this list
 

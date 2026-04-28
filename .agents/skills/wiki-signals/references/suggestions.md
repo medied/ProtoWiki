@@ -205,8 +205,7 @@ Filter the loaded suggestions through the set on render.
 ## See also
 
 - [`visual-editor-prototyping`](../../visual-editor-prototyping/SKILL.md)
-  — the umbrella that decides whether your work should use a stand-in
-  editor with simulated suggestions, or vendor real VE instead.
+  — fork upstream demos vs suggestion overlays vs vendoring real VE.
 - fakewiki's
   [`docs/VE_SUGGESTION_TYPES_REPORT.md`](https://github.com/TodePond/FakeMediaWiki/blob/main/packages/fakewiki/docs/VE_SUGGESTION_TYPES_REPORT.md)
   — exhaustive per-check writeup with file pointers.

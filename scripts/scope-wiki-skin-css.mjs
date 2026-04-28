@@ -6,7 +6,7 @@
  *      RL CSS has aggressive rules like `a { padding: 0 !important }` that are
  *      meant for `<a>` inside Wikipedia article HTML and will squash Cdx components
  *      if applied broadly.
- *   2. We only render real wiki HTML inside `.mw-parser-output` (via ArticleContent),
+ *   2. We only render real wiki HTML inside `.mw-parser-output` (via ArticleLiveContent),
  *      so scoping there is sufficient and matches RL's design intent.
  *
  * Selectors already mentioning `.mw-parser-output` are left as-is (just skin-prefixed).

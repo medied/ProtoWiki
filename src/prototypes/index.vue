@@ -34,6 +34,20 @@ function humanize(path: string): string {
     .replace(/\b\w/g, (c) => c.toUpperCase())
 }
 
+/** Bucket from `definePage` title — `Template:` / `Example:` prefixes (case-insensitive). */
+function prototypeBucket(title: string): 'regular' | 'template' | 'example' {
+  const t = title.trim()
+  if (/^template\s*:/i.test(t)) return 'template'
+  if (/^example\s*:/i.test(t)) return 'example'
+  return 'regular'
+}
+
+const bucketOrder: Record<'regular' | 'template' | 'example', number> = {
+  regular: 0,
+  template: 1,
+  example: 2,
+}
+
 const prototypes = computed<PrototypeEntry[]>(() => {
   return router
     .getRoutes()
@@ -50,7 +64,13 @@ const prototypes = computed<PrototypeEntry[]>(() => {
         description,
       }
     })
-    .sort((a, b) => a.path.localeCompare(b.path))
+    .sort((a, b) => {
+      const ba = prototypeBucket(a.title)
+      const bb = prototypeBucket(b.title)
+      const cmpBucket = bucketOrder[ba] - bucketOrder[bb]
+      if (cmpBucket !== 0) return cmpBucket
+      return a.title.localeCompare(b.title, undefined, { sensitivity: 'base' })
+    })
 })
 </script>
 

@@ -50,9 +50,7 @@ action. Don't ship those in client code without a clear plan for:
 - Who's responsible for the edits the prototype creates (probably nobody
   wants 1000 demo edits from a developer's account).
 
-For prototyping editor UX, prefer a stand-in editor that emits a
-mock-publish event rather than calling `?action=edit` for real. No real
-edit gets made; that's the right default for a prototype.
+For prototyping editor UX, prefer **mock publish** handlers or fork **[Bárbara Martínez Calvo’s article-template / suggestion-mode repos](../../protowiki-components/references/editors.md)** rather than calling `?action=edit` for real. No real edit gets made; that's the right default for a prototype.
 
 ## Snapshot data when you can
 

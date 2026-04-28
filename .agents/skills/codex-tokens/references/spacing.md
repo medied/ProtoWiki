@@ -30,7 +30,7 @@ pixel value.
 
 ## Container scope
 
-`Article` (outer shell) and `ArticleContent` (parser column) share vertical padding; you don't
+`Article` (outer shell) and `ArticleLiveContent` (parser column) share vertical padding; you don't
 need to add page-level padding inside it for the article column. Use spacing tokens for
 *intra-component* gaps.
 

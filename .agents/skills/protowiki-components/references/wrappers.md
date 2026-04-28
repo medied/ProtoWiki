@@ -19,7 +19,6 @@ Components **emit** that class from their templates — you pass a **prop** or
 | `Article` | `title` / `displayTitle` / `contentType` (live vs mock vs baked) | `#heading` | Page title lives in `ArticleHeader`; in-body `mw-first-heading` only when `ArticleLiveContent` shows it |
 | `ArticleLiveContent` | `title` / `displayTitle` | `#heading` | Slot replaces default inner HTML of the `<h1>`; use alone without `ArticleHeader` |
 | `SpecialPageWrapper` | `title?` | `#title` | Special-page header typography (scoped — not `mw-first-heading`) |
-| `ArticleEditor` / `ArticleEditorPlus` | `title?` | `#heading` | Slot replaces plain-text title |
 
 `ChromeWrapper` does **not** render a page title — compose with
 the rows above.
@@ -106,7 +105,7 @@ full-width content area. **No chrome, no columns.**
 ```
 
 Optional **`#help`** (title-row link cluster) and **`#notices`** (strip above the title)
-mirror FakeMediaWiki `SpecialView`. See `src/prototypes/special-page-example/index.vue`.
+mirror FakeMediaWiki `SpecialView`. See `src/prototypes/special-page-template/index.vue`.
 
 ## PlainWrapper
 

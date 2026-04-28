@@ -74,14 +74,36 @@ Place experiments as siblings before or after `<Article>` in the default slot.
 
 ## Edit-suggestion flow
 
+Put **your editing surface** (e.g. a `contenteditable` region or code lifted from [Bárbara’s repos](editors.md)) beside a suggestion panel — see [`edit-suggestions.md`](edit-suggestions.md). Sketch:
+
 ```vue
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const surfaceRef = ref<HTMLDivElement | null>(null)
+const draftHtml = ref('<p>…</p>')
+function syncDraft() {
+  if (!surfaceRef.value) return
+  draftHtml.value = surfaceRef.value.innerHTML
+}
+function onPublish() {
+  /* mock publish — never hit a real wiki */
+}
+</script>
+
 <ChromeWrapper>
   <SpecialPageWrapper title="Suggested edits">
-    <ArticleEditorPlus
-      v-model="draftHtml"
-      :title="suggestion.title"
-      @publish="onPublish"
-    />
+    <div class="layout">
+      <div
+        ref="surfaceRef"
+        class="mw-parser-output"
+        contenteditable="true"
+        role="textbox"
+        aria-multiline="true"
+        @input="syncDraft"
+      ></div>
+      <!-- <aside> suggestion cards … -->
+    </div>
   </SpecialPageWrapper>
 </ChromeWrapper>
 ```

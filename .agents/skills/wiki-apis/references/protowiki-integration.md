@@ -8,7 +8,7 @@ endpoints, and how to refresh the committed schema snapshots.
 
 | Component | API | Notes |
 | --- | --- | --- |
-| `Article` / `ArticleContent` | REST `/page/html/{title}` | `Article` composes `ArticleContent`. Defaults to `en.wikipedia.org`; `host` prop switches wiki. Optional `lang` / `dir`. |
+| `Article` | REST `/page/html/{title}` | **`Article`** composes **`ArticleLiveContent`** (live REST or `:html`) or **`ArticleMockContent`** (Wet Leg snapshot). Defaults to `en.wikipedia.org`; `host` prop switches wiki. Optional `lang` / `dir`. |
 | `SearchBar` | Action `?action=opensearch` | Debounced + `AbortController`-cancelled. Defaults to `en.wikipedia.org`; takes a `host` prop. |
 
 If you find yourself reaching for `fetch` directly to one of these
@@ -26,17 +26,14 @@ ProtoWiki/0.1 (https://github.com/<org>/protowiki; <contact-email-or-tag>)
 
 In-browser, the browser sets its own UA — you don't need to override it.
 
-## Editor stand-ins and `action=edit`
+## Never hit `action=edit` from a prototype
 
-ProtoWiki's local stand-in editors emit a `publish` event instead of
-calling `?action=edit` against a real wiki. The principle is: a
-prototype demonstrates the publish *flow*, not the publish *side
-effect*. Only swap that out for a real edit when the prototype's whole
-point is server-side behaviour. See
-[`protowiki-components`](../../protowiki-components/SKILL.md) for the
-event payload and
-[`visual-editor-prototyping`](../../visual-editor-prototyping/SKILL.md)
-for the broader rationale.
+Do not POST edits to a real wiki from ProtoWiki routes. Demonstrate the
+publish *flow* with mocked handlers (toast, `console`, emit). For VisualEditor-shaped
+chrome, fork **[Bárbara Martínez Calvo’s repos](../../protowiki-components/references/editors.md)**
+or build locally — see [`visual-editor-prototyping`](../../visual-editor-prototyping/SKILL.md).
+Suggestion-overlay payloads alongside your surface are documented in
+[`protowiki-components` → `edit-suggestions.md`](../../protowiki-components/references/edit-suggestions.md).
 
 ## Refreshing committed API schema snapshots
 
@@ -63,6 +60,6 @@ too; only the snapshot paths change.
 
 - [`wiki-apis`](../SKILL.md) — the agnostic API guidance.
 - [`protowiki-components`](../../protowiki-components/SKILL.md) — for
-  what `Article`, `ArticleContent`, and `SearchBar` actually expose.
+  what `Article`, `ArticleLiveContent`, `ArticleMockContent`, and `SearchBar` expose.
 - [`wiki-snapshot-data`](../../wiki-snapshot-data/SKILL.md) — when not
   to fetch live at all.

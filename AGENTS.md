@@ -8,9 +8,9 @@ just orients you.
 
 - **`src/`** — the Vue app. Each prototype is a folder under
   `src/prototypes/`. Single-concern layout wrappers, chrome primitives,
-  data utilities, and editor stand-ins live in `src/components/` (see
+  data utilities, and reader-focused components — see
   [`protowiki-components`](.agents/skills/protowiki-components/SKILL.md)
-  for the catalogue). Composables in `src/composables/`. Theming logic
+  for the catalogue. Composables in `src/composables/`. Theming logic
   in `src/lib/`. Styles in `src/styles/`.
 - **`.agents/skills/`** — the *single canonical home* for non-code
   material: how to use Codex, how to fetch Wikipedia data, how the
@@ -64,7 +64,7 @@ or to that skill's trailing **Inside ProtoWiki** section.
 | --- | --- |
 | [`protowiki-getting-started`](.agents/skills/protowiki-getting-started/SKILL.md) | Orientation: what ProtoWiki is, the stack, where everything lives |
 | [`protowiki-create-prototype`](.agents/skills/protowiki-create-prototype/SKILL.md) | Adding a new prototype via file-based routing — zero registration |
-| [`protowiki-components`](.agents/skills/protowiki-components/SKILL.md) | All shipped components: wrappers, chrome primitives, data utilities, editors |
+| [`protowiki-components`](.agents/skills/protowiki-components/SKILL.md) | Shipped Vue components: wrappers, chrome, article surfaces, search |
 | [`protowiki-skins`](.agents/skills/protowiki-skins/SKILL.md) | Vector 2022 (desktop) vs Minerva (mobile); per-component skin overrides |
 | [`protowiki-theme`](.agents/skills/protowiki-theme/SKILL.md) | Light / dark theming; per-component theme overrides |
 | [`protowiki-deploy`](.agents/skills/protowiki-deploy/SKILL.md) | `npm run build`, GitHub Pages base path, SPA 404 redirect, CI workflow |
@@ -92,7 +92,7 @@ or to that skill's trailing **Inside ProtoWiki** section.
 
 | Skill | What it covers |
 | --- | --- |
-| [`visual-editor-prototyping`](.agents/skills/visual-editor-prototyping/SKILL.md) | Umbrella: pick between local stand-ins, edit suggestions, real VE |
+| [`visual-editor-prototyping`](.agents/skills/visual-editor-prototyping/SKILL.md) | Fork Bárbara’s article template + suggestion-mode repos, suggestion overlays, or real VE |
 | [`visual-editor-vendoring`](.agents/skills/visual-editor-vendoring/SKILL.md) | Real upstream VE: `update-ve.sh`, `loadVe.ts`, lifecycle (universal) |
 | [`protowiki-ve-vendoring`](.agents/skills/protowiki-ve-vendoring/SKILL.md) | ProtoWiki integration: `public/visualeditor/`, `src/lib/visualeditor/`, theming conflict |
 
@@ -100,7 +100,7 @@ Edit Check-style suggestion overlays are split between two skills: see
 [`wiki-signals` → `suggestions.md`](.agents/skills/wiki-signals/references/suggestions.md)
 for simulating the stream and
 [`protowiki-components` → `edit-suggestions.md`](.agents/skills/protowiki-components/references/edit-suggestions.md)
-for rendering it on top of the editor stand-ins.
+for rendering suggestions beside your editing surface.
 
 ## Conventions
 

@@ -32,9 +32,8 @@ npm run lint        # ESLint
 
 - `src/prototypes/` — one folder per prototype. The home page (`index.vue`)
   auto-discovers them via [`unplugin-vue-router`](https://uvr.esm.is/).
-- `src/components/` — single-concern layout wrappers, chrome primitives,
-  data utilities, and editor stand-ins. See
-  [`protowiki-components`](.agents/skills/protowiki-components/SKILL.md)
+- `src/components/` — layout wrappers, chrome primitives, article surfaces,
+  and `SearchBar` (live Wikipedia lookups). See [`protowiki-components`](.agents/skills/protowiki-components/SKILL.md)
   for the full catalogue.
 - `src/composables/` — read-only theming hooks.
 - `src/lib/` — boot-time skin / theme resolution with runtime Codex-token
@@ -54,7 +53,7 @@ Both AI agents and humans can read them.
 
 - [`protowiki-getting-started`](.agents/skills/protowiki-getting-started/SKILL.md) — orientation
 - [`protowiki-create-prototype`](.agents/skills/protowiki-create-prototype/SKILL.md) — make a new prototype
-- [`protowiki-components`](.agents/skills/protowiki-components/SKILL.md) — wrappers, chrome, data utilities, editors
+- [`protowiki-components`](.agents/skills/protowiki-components/SKILL.md) — wrappers, chrome, article surfaces, search
 - [`protowiki-skins`](.agents/skills/protowiki-skins/SKILL.md) — desktop / mobile skins
 - [`protowiki-theme`](.agents/skills/protowiki-theme/SKILL.md) — light / dark theming
 - [`protowiki-deploy`](.agents/skills/protowiki-deploy/SKILL.md) — building and deploying to GitHub Pages
@@ -76,14 +75,14 @@ Both AI agents and humans can read them.
 
 ### Visual Editor
 
-- [`visual-editor-prototyping`](.agents/skills/visual-editor-prototyping/SKILL.md) — pick between local stand-ins / suggestions / real VE
+- [`visual-editor-prototyping`](.agents/skills/visual-editor-prototyping/SKILL.md) — fork Bárbara’s article template + suggestion-mode repos / suggestion overlays / real VE
 - [`visual-editor-vendoring`](.agents/skills/visual-editor-vendoring/SKILL.md) — vendor the real upstream VE (universal pattern)
 
 For Edit Check-style suggestion overlays, see
 [`wiki-signals` → `suggestions.md`](.agents/skills/wiki-signals/references/suggestions.md)
 (simulating the stream) and
 [`protowiki-components` → `edit-suggestions.md`](.agents/skills/protowiki-components/references/edit-suggestions.md)
-(rendering it inside `ArticleEditor` / `ArticleEditorPlus`).
+(rendering beside your editing surface).
 
 For agents specifically, see [`AGENTS.md`](AGENTS.md).
 
@@ -92,7 +91,7 @@ For agents specifically, see [`AGENTS.md`](AGENTS.md).
 Useful when sharing a prototype:
 
 ```
-/example?skin=mobile           ← force mobile chrome
+/chrome-template?skin=mobile   ← force mobile chrome
 ```
 
 These pin the global skin / theme; otherwise ProtoWiki resolves them

@@ -1,6 +1,6 @@
 ---
 name: visual-editor-prototyping
-description: Umbrella for prototyping Wikipedia editor (VisualEditor / wikitext) UIs — a decision matrix between local stand-in editors, edit-suggestion overlays, and vendoring the real upstream VisualEditor bundle. Use when prototyping an edit experience, picking a fidelity level, or asking "should I use a local stand-in or real VE?".
+description: Umbrella for prototyping Wikipedia editor (VisualEditor / wikitext) UIs — a decision matrix between forked upstream demos (Bárbara Martínez Calvo’s article template + suggestion-mode repos), edit-suggestion overlays, and vendoring the real upstream VisualEditor bundle. Use when prototyping an edit experience, picking a fidelity level, or asking "should I clone an upstream demo or vendor real VE?".
 license: MIT
 ---
 
@@ -13,11 +13,9 @@ with the most "should we add this?" questions.
 
 This skill is the umbrella. It picks between three approaches:
 
-1. **Local VE stand-ins** — a lightweight `contenteditable`-based
-   editor with a Codex toolbar, sufficient for prototyping flow and
-   chrome around an editor.
+1. **Fork proven edit UX** — clone **[Bárbara Martínez Calvo](https://github.com/bmartinezcalvo)**’s **[wikipedia-article-template](https://github.com/bmartinezcalvo/wikipedia-article-template)** (`WikipediaPage.vue` edit mode, Vector vs Minerva toolbars) and/or **[suggestion-mode](https://github.com/bmartinezcalvo/suggestion-mode)** (**[hosted demo](https://bmartinezcalvo.github.io/suggestion-mode/)**). Iterate there for toolbar layout and coaching flows; optionally lift pieces into ProtoWiki prototypes later.
 2. **Edit-suggestion overlays** — fakewiki-style mocking of an "Edit
-   Check"-like data layer on top of a stand-in. Use when the work is
+   Check"-like data layer on top of **your** editing surface. Use when the work is
    about *coaching the edit* (citation suggestions, tone warnings,
    etc.).
 3. **Real upstream VisualEditor** — vendor and load the genuine VE
@@ -27,13 +25,13 @@ This skill is the umbrella. It picks between three approaches:
 
 | Work is about | Recommended | Skill |
 | --- | --- | --- |
-| Header / footer / chrome around an editor | Local stand-in | — |
-| Save / publish flow | Local stand-in (with diff if available) | — |
+| Header / footer / chrome around an editor | Fork article template + compose with ProtoWiki wrappers | [`references/editors.md`](../protowiki-components/references/editors.md) |
+| Toolbar layout matching published demos | **`wikipedia-article-template`** / **`suggestion-mode`** repos | [`references/editors.md`](../protowiki-components/references/editors.md) |
+| Save / publish flow | Your fork or minimal `contenteditable` + mock publish | — |
 | "Edit suggestions" / Edit Check coaching — simulating the stream | Mocked JSON / rule-based generator / Lift Wing | [`wiki-signals` → `suggestions.md`](../wiki-signals/references/suggestions.md) |
-| "Edit suggestions" / Edit Check coaching — rendering inside the editor | Stand-in + suggestion panel | — |
-| Diff / review UI (post-edit) | Stand-in with word-level diff | — |
-| Source mode toggle / wikitext inspection | Stand-in with source mode | — |
-| The editor toolbar layout itself | Real VE | [`visual-editor-vendoring`](../visual-editor-vendoring/SKILL.md) |
+| "Edit suggestions" / Edit Check coaching — rendering beside the editor | Your surface + suggestion panel | [`protowiki-components` → `edit-suggestions.md`](../protowiki-components/references/edit-suggestions.md) |
+| Diff / review UI (post-edit) | Custom dialog around publish handler, or composable diff | — |
+| Source mode toggle / wikitext inspection | Layer a textarea toggle around HTML state, or custom prototype | — |
 | Full inline node-tree editing (transclusions, references, templates) | Real VE | [`visual-editor-vendoring`](../visual-editor-vendoring/SKILL.md) |
 | MediaWiki-server-side validation | Real VE + a real wiki | (out of scope) |
 | Multi-user real-time editing | Real VE + custom backend | (out of scope) |
@@ -41,47 +39,43 @@ This skill is the umbrella. It picks between three approaches:
 [`references/decision-matrix.md`](references/decision-matrix.md) goes
 deeper.
 
-## Approach 1 — local stand-ins
+## Approach 1 — fork article template + suggestion mode
 
-A lightweight stand-in is typically two `contenteditable` views (rich
-mode + optional source mode) with a Codex toolbar. Cheap to ship, no
-external bundle, renders correctly in dark mode and RTL via the
-standard Codex theming.
+ProtoWiki intentionally does **not** ship `ArticleEditor`. For realistic edit chrome and suggestion-mode flows, **clone and prototype in**:
 
-Either one replaces the article body when the page enters edit mode:
+| Repo | Role |
+| --- | --- |
+| [`bmartinezcalvo/wikipedia-article-template`](https://github.com/bmartinezcalvo/wikipedia-article-template) | Edit mode + Vector / Minerva toolbars |
+| [`bmartinezcalvo/suggestion-mode`](https://github.com/bmartinezcalvo/suggestion-mode) | **[Demo](https://bmartinezcalvo.github.io/suggestion-mode/)** — suggestion-mode UX |
+
+Bring extracted markup or behaviour into `src/prototypes/<your-name>/` when you combine it with ProtoWiki chrome (`ChromeWrapper`, Codex).
+
+Either pattern replaces or sits beside the article body when the page enters edit mode:
 
 ```vue
 <ChromeWrapper>
-  <Article v-if="editing">
-    <ArticleEditor
-      :title="title"
-      :html="html"
-      @publish="onPublish"
-      @cancel="editing = false"
-    />
-  </Article>
-  <Article v-else :title="title" />
+  <Article v-if="!editing" title="Albert Einstein" />
+  <!-- Surface from forked template, or minimal contenteditable prototype -->
+  <MyEditSurface v-else v-model="html" @publish="onPublish" @cancel="editing = false" />
 </ChromeWrapper>
 ```
 
-The cost is illustrative-only fidelity (no node-context inspector, no
-template editor, no real wikitext output). Enough for any flow or
-chrome question.
+The cost of rolling your own here is illustrative-only fidelity (no node-context inspector, no real wikitext output) unless you vendor VE — enough for flow and chrome questions.
 
 ## Approach 2 — edit-suggestion overlays
 
 When the work demonstrates "the editor noticed something about your
 edit and is suggesting X", you need a *suggestion stream* on top of
-the basic editor. fakewiki ships an example; we replicate the shape.
+the basic editor.
 
 The work splits cleanly along two axes — and so do the references:
 
 - **Simulating the stream** (which check types exist, fixture vs.
   rule-based vs. Lift Wing inference, where the JSON lives) →
   [`wiki-signals` → `suggestions.md`](../wiki-signals/references/suggestions.md).
-- **Storing and rendering it** inside the editor — payload shape,
-  side-by-side layout, "apply" semantics — is your consuming
-  environment's concern.
+- **Storing and rendering it** beside **your** editor — payload shape,
+  side-by-side layout, "apply" semantics — see
+  [`protowiki-components` → `edit-suggestions.md`](../protowiki-components/references/edit-suggestions.md).
 
 ## Approach 3 — real upstream VisualEditor
 
@@ -109,29 +103,13 @@ Regardless of which approach:
 
 ## Picking quickly
 
-If you're not sure, start with the local stand-in. You can always graduate
+Start from **Bárbara’s repos** when edit chrome fidelity matters. You can always graduate
 to real VE later if the work demands it. Reverse is harder.
 
 ## Inside ProtoWiki
 
-ProtoWiki ships two stand-in editors at `src/components/`:
+- **No shipped `ArticleEditor`** — see [`references/editors.md`](../protowiki-components/references/editors.md) for the external references.
+- **Suggestion overlays** — consumer contract in [`protowiki-components/references/edit-suggestions.md`](../protowiki-components/references/edit-suggestions.md); simulation in [`wiki-signals/references/suggestions.md`](../wiki-signals/references/suggestions.md).
+- **Real VE in this repo** — [`protowiki-ve-vendoring`](../protowiki-ve-vendoring/SKILL.md) when you vendor the upstream bundle under `public/visualeditor/`.
 
-- **`ArticleEditor`** — Barbara-style: toolbar (Bold / Italic /
-  Headings / Cite / Link / Edit-options dropdown), `contenteditable`
-  surface, undo, change detection, mock publish.
-- **`ArticleEditorPlus`** — same, plus source mode, autosave to
-  `localStorage`, word-diff publish preview.
-
-Either replaces `Article` when the page enters edit mode (the
-example above is real ProtoWiki code). For the per-component reference
-see [`protowiki-components`](../protowiki-components/SKILL.md) and its
-`references/editors.md`.
-
-If you build a suggestion-overlay prototype, drop it under
-`src/prototypes/<your-name>/` and it'll auto-route via
-`unplugin-vue-router`. The consumer-side payload shape and rendering
-contract live in
-[`protowiki-components/references/edit-suggestions.md`](../protowiki-components/references/edit-suggestions.md);
-the simulation side (where the JSON comes from, what fields exist)
-lives in
-[`wiki-signals/references/suggestions.md`](../wiki-signals/references/suggestions.md).
+Drop combined experiments under `src/prototypes/<your-name>/`; routes are file-based (`unplugin-vue-router`).

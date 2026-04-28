@@ -6,10 +6,11 @@ import { defineConfig } from 'vite'
 import VueRouter from 'unplugin-vue-router/vite'
 import vue from '@vitejs/plugin-vue'
 
-// Production builds use a relative base so the app works under any GitHub Pages
-// path (e.g. …/github.io/ProtoWiki/) without hard-coding the repo name. Override
-// with PROTOWIKI_BASE (e.g. '/' for a custom domain at the site root).
-const buildBase = process.env.PROTOWIKI_BASE ?? './'
+// GitHub Pages project sites need an absolute path prefix. Do not use './' here:
+// Vue Router's normalizeBase turns './' into '/.', so the current path never
+// matches your routes (blank app). CI sets PROTOWIKI_BASE from the repo name.
+// Override locally, e.g. PROTOWIKI_BASE='/ProtoWiki/' npm run build
+const buildBase = process.env.PROTOWIKI_BASE ?? '/protowiki/'
 
 export default defineConfig(({ command }) => ({
   base: command === 'build' ? buildBase : '/',

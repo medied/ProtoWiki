@@ -6,9 +6,10 @@ A long-form expansion of the matrix in the SKILL body.
 
 **Strengths**
 
-- Zero or near-zero cost — typically a `contenteditable` surface with
-  a Codex toolbar.
-- Renders instantly; no separate bundle download.
+- Clone **[wikipedia-article-template](https://github.com/bmartinezcalvo/wikipedia-article-template)** and/or **[suggestion-mode](https://github.com/bmartinezcalvo/suggestion-mode)** first when you need toolbar chrome that matches published demos; iterate there, then lift pieces into ProtoWiki.
+- Zero or near-zero cost for a scratch prototype — typically a `contenteditable` surface with
+  Codex controls.
+- Renders instantly; no separate VE bundle download.
 - Works offline.
 - Renders correctly in dark mode and RTL via the standard Codex theming.
 - A "plus" variant can add autosave drafts and a publish-time word
@@ -84,6 +85,6 @@ full VE bundle.
 
 | Approach | Bundle size | Setup time | Fidelity | When |
 | --- | --- | --- | --- | --- |
-| Local stand-in | 0 (already shipped) | 0 min | Low–medium | Default |
+| Local stand-in | 0 (fork / scratch; not a ProtoWiki component) | 0 min | Low–medium | Default |
 | Stand-in + suggestions | ~1KB JSON | ~1h to wire | Medium | Edit Check UX |
 | Real VE | Multiple MB | ~1d | High | Editor itself is the subject |

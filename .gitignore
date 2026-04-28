@@ -11,3 +11,5 @@ dist
 
 src/typed-router.d.ts
 src/auto-imports.d.ts
+
+.scratch/**/*
