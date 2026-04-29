@@ -427,6 +427,12 @@ const isMobile = computed(() => effectiveSkin.value === 'mobile')
   opacity: 0.67;
 }
 
+.chrome-header[data-theme='dark'] .chrome-header__wordmark-img,
+.chrome-header[data-theme='dark'] .chrome-header__tagline-img,
+.chrome-header[data-theme='dark'][data-skin='mobile'] .chrome-header__mobile-wordmark-img {
+  opacity: 0;
+}
+
 .chrome-header[data-skin='mobile'] .chrome-header__mobile-actions {
   display: flex;
   flex-shrink: 0;
