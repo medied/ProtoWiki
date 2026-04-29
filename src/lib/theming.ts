@@ -37,6 +37,12 @@ const DESKTOP_MIN_WIDTH = 640
  * Codex CSS custom-property cascade does the rest. Codex ships these tokens
  * as `:root` rules (always-on); we just rewrite the selector at runtime so
  * they cascade off `data-theme` instead.
+ *
+ * **Dark theme uses two stacked injections.** `theme-wikimedia-ui-mode-dark.css`
+ * only overrides colours (no typography/spacing). Upstream stacks base + dark on
+ * the same `:root`; we mirror that with `[data-theme="dark"]` ×2 — full light
+ * tokens first, then palette overrides — so `--font-size-*`, `--spacing-*`, etc.
+ * stay defined under dark mode.
  */
 function injectThemedTokens(): void {
   if (typeof document === 'undefined') return
@@ -51,7 +57,9 @@ function injectThemedTokens(): void {
   }
 
   inject(lightTokensRaw, '[data-theme="light"]', 'protowiki-tokens-light')
-  inject(darkTokensRaw, '[data-theme="dark"]', 'protowiki-tokens-dark')
+
+  inject(lightTokensRaw, '[data-theme="dark"]', 'protowiki-tokens-dark-base')
+  inject(darkTokensRaw, '[data-theme="dark"]', 'protowiki-tokens-dark-palette')
 }
 
 // Module-level reactive refs that mirror the data-skin / data-theme
