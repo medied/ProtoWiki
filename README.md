@@ -45,14 +45,14 @@ _Either follow these instructions, or ask an AI agent to follow them for you!_
 
 To run ProtoWiki locally, clone this repo or fork it to use it as a template.
 
-Then run these commands:
+Then install dependencies and run the dev server:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open [http://localhost:5173](localhost:5173) in your browser.
+Then open [localhost:5173](https://localhost:5173) in your browser.
 
 ### Creating a prototype
 
