@@ -37,11 +37,13 @@ Lists of APIs you can use within prototypes.
 - [Wiki Signals](https://todepond.github.io/FakeMediaWiki/Fullscreen/WikiSignals) — "Guidance for using real MediaWiki data in prototypes."
 - [FakeWiki Playground](https://todepond.github.io/FakeMediaWiki/Fullscreen/ApiPlayground) — Explore every function from the `fakewiki` package.
 - [FakeWiki LLMs.txt](https://todepond.github.io/FakeMediaWiki/llms.txt) — Intended for AI agents: A list of methods and composables exported from the `fakewiki` package.
-- [FakeWiki Reference](https://todepond.github.io/FakeMediaWiki/Fullscreen/FakeWikiReference) — Intended for humans: A list of methods and composables exported from the `fakewiki` package. 
+- [FakeWiki Reference](https://todepond.github.io/FakeMediaWiki/Fullscreen/FakeWikiReference) — Intended for humans: A list of methods and composables exported from the `fakewiki` package.
 
 ## Using ProtoWiki as a system
 
-To run ProtoWiki locally, clone this repo or use it as a template.
+_Either follow these instructions, or ask an AI agent to follow them for you!_
+
+To run ProtoWiki locally, clone this repo or fork it to use it as a template.
 
 Then run these commands:
 
